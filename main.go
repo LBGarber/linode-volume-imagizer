@@ -56,7 +56,7 @@ func main() {
 			&cli.StringFlag{
 				Name:        "region",
 				Aliases:     []string{"r"},
-				Usage:       "The region to create an image in.",
+				Usage:       "The region in which the volume exists.",
 				Value: "us-southeast",
 			},
 			&cli.IntFlag{
