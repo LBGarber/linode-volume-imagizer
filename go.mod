@@ -14,6 +14,7 @@ require (
 	github.com/russross/blackfriday/v2 v2.0.1 // indirect
 	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 	github.com/urfave/cli/v2 v2.3.0 // indirect
+	github.com/xyproto/randomstring v0.0.0-20210824125156-24cf50c16803 // indirect
 	golang.org/x/net v0.0.0-20210928044308-7d9f5e0b762b // indirect
 	google.golang.org/appengine v1.4.0 // indirect
 )

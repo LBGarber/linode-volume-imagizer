@@ -30,12 +30,13 @@ func cliMain(c *cli.Context) error {
 
 	volumeId := c.Int("volume_id")
 	region := c.String("region")
+	builderType := c.String("builder_type")
 	download := c.Bool("download")
 
 	builder := builder2.NewImagizer(token)
 
 	if !download {
-		image, err := builder.BuildImage(region, volumeId)
+		image, err := builder.BuildImage(region, builderType, volumeId)
 		if err != nil {
 			return err
 		}
@@ -44,7 +45,7 @@ func cliMain(c *cli.Context) error {
 		return nil
 	}
 
-	return builder.DownloadImage(region, volumeId)
+	return builder.DownloadImage(region, builderType, volumeId)
 }
 
 func main() {
@@ -63,6 +64,12 @@ func main() {
 				Aliases:     []string{"r"},
 				Usage:       "The region in which the volume exists.",
 				Value: "us-southeast",
+			},
+			&cli.StringFlag{
+				Name:        "builder_type",
+				Aliases:     []string{"type"},
+				Usage:       "The type of Instance to use as a builder.",
+				Value: 		 "g6-standard-2",
 			},
 			&cli.IntFlag{
 				Name:        "volume_id",

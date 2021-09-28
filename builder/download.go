@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/linode/linodego"
+	"github.com/xyproto/randomstring"
 	"io"
 	"io/ioutil"
 	"log"
@@ -14,7 +15,7 @@ import (
 
 // TODO: Eliminate code redundancy
 
-func (b *Imagizer) DownloadImage(region string, volumeId int) error {
+func (b *Imagizer) DownloadImage(region, builderType string, volumeId int) error {
 	timestamp := time.Now().Unix()
 
 	log.Printf("Getting volume...\n")
@@ -54,10 +55,10 @@ func (b *Imagizer) DownloadImage(region string, volumeId int) error {
 
 	instCreateOptions := linodego.InstanceCreateOptions{
 		Region:          region,
-		Type:            "g6-standard-2",
+		Type:            builderType,
 		Label:           fmt.Sprintf("imagizer-builder-%v", timestamp),
-		RootPass:        "root-pass",
 		Image: 			 "linode/alpine3.14",
+		RootPass: 		 randomstring.CookieFriendlyString(64),
 		Booted: 		 &booted,
 		StackScriptID:   stackscript.ID,
 		StackScriptData: map[string]string{
