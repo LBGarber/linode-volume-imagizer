@@ -74,7 +74,6 @@ func main() {
 				Name: "download",
 				Aliases: []string{"d"},
 				Usage: "If set, the image will be downloaded locally.",
-				Required: true,
 			},
 		},
 		Action: cliMain,
