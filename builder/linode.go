@@ -43,7 +43,7 @@ func (b *Imagizer) BuildImage(region, builderType string, volumeId int) (*linode
 
 	defer func() {
 		log.Printf("Deleting StackScript...\n")
-		if err := b.client.DeleteInstance(context.Background(), stackscript.ID); err != nil {
+		if err := b.client.DeleteStackscript(context.Background(), stackscript.ID); err != nil {
 			log.Println(fmt.Errorf("failed to delete stackscript: %v", err))
 		}
 	}()
