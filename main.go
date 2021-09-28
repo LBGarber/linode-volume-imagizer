@@ -30,16 +30,21 @@ func cliMain(c *cli.Context) error {
 
 	volumeId := c.Int("volume_id")
 	region := c.String("region")
+	download := c.Bool("download")
 
 	builder := builder2.NewImagizer(token)
-	image, err := builder.BuildImage(region, volumeId)
-	if err != nil {
-		return err
+
+	if !download {
+		image, err := builder.BuildImage(region, volumeId)
+		if err != nil {
+			return err
+		}
+
+		log.Printf("Successfully created image:\nID: %v\nLabel: %v\nSize: %v\n", image.ID, image.Label, image.Size)
+		return nil
 	}
 
-	log.Printf("Successfully created image:\nID: %v\nLabel: %v\nSize: %v\n", image.ID, image.Label, image.Size)
-
-	return nil
+	return builder.DownloadImage(region, volumeId)
 }
 
 func main() {
@@ -63,6 +68,12 @@ func main() {
 				Name:        "volume_id",
 				Aliases:     []string{"v"},
 				Usage:       "The ID of the volume to imagize.",
+				Required: true,
+			},
+			&cli.BoolFlag{
+				Name: "download",
+				Aliases: []string{"d"},
+				Usage: "If set, the image will be downloaded locally.",
 				Required: true,
 			},
 		},

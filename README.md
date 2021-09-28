@@ -13,5 +13,6 @@ GLOBAL OPTIONS:
    --token value, -t value      Your Linode Personal Access Token.
    --region value, -r value     The region in which the volume exists. (default: "us-southeast")
    --volume_id value, -v value  The ID of the volume to imagize.
+   --download, -d               If set, the image will be downloaded locally.
    --help, -h                   show help
 ```
